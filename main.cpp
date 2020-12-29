@@ -45,6 +45,18 @@ std::map <std::string, std::string> create_dict_morse_to_car(){
     return m;
 }
 
+std::map <std::string, std::string> create_dict_car_to_morse(){
+    std::map <std::string, std::string> mtc = create_dict_morse_to_car();
+    std::map <std::string, std::string> m;
+
+    for (auto item: mtc){
+        // std::cout<<item.first<<" -> "<<item.second<<std::endl;
+        m[item.second] = item.first;
+    }
+
+    return m;
+}
+
 int main(){
 
     return 0;
