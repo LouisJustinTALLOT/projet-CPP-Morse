@@ -90,5 +90,8 @@ int main(){
     std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
    
 
+    std::string test_morse_1 = ".... . .-.. .-.. ---     .-- --- .-. .-.. -..";
+    std::cout<<Morse_to_text(test_morse_1)<<std::endl;
+    
     return 0;
 }
