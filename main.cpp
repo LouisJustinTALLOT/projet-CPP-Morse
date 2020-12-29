@@ -59,5 +59,10 @@ std::map <std::string, std::string> create_dict_car_to_morse(){
 
 int main(){
 
+
+    std::map <std::string, std::string> dict_morse_car = create_dict_morse_to_car();
+    std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
+   
+
     return 0;
 }
