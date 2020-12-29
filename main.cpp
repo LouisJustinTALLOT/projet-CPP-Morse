@@ -57,6 +57,32 @@ std::map <std::string, std::string> create_dict_car_to_morse(){
     return m;
 }
 
+
+std::string Morse_to_text(std::string morse, 
+                        std::map <std::string, std::string> dict_morse_car = create_dict_morse_to_car()){
+    std::string res = "";
+    std::string temp = "";
+
+    for(int i=0; i<morse.length(); i++ ){
+        if (morse[i] == ' ' ){
+            
+            res += dict_morse_car[temp];
+            temp = "";
+        }
+        else if (i+1 == morse.length()){
+            temp += morse[i];
+            res += dict_morse_car[temp];
+        }
+        else
+        {
+            temp += morse[i];
+        }
+        
+    }
+
+    return res;
+}
+
 int main(){
 
 
