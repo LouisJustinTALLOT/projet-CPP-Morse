@@ -160,9 +160,9 @@ int main(){
     std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
    
 
-    std::string test_morse_1 = ".... . .-.. .-.. ---     .-- --- .-. .-.. -..";
+    std::string test_morse_1 = "    .... . .-.. .-.. ---   .-- --- .-. .-.. -..   -.-.--   ";
     std::cout<<Morse_to_text(test_morse_1, dict_morse_car)<<std::endl;
-    std::string test_text_1 = "hello world !";
+    std::string test_text_1 = "     hello world !      ";
     std::cout<<text_to_Morse(test_text_1, dict_car_morse)<<std::endl;
 
     return 0;
