@@ -94,21 +94,43 @@ std::string Morse_to_text(std::string morse,
     std::string res = "";
     std::string temp = "";
 
+    // we first trim the leading and trailing spaces of morse text
+    morse = trim(morse);
+
     for(int i=0; i<morse.length(); i++ ){
-        if (morse[i] == ' ' ){
-            
-            res += dict_morse_car[temp];
-            temp = "";
+        // for each character we check whether it is a space or not 
+        // if yes it is the end of a letter
+        // but it could also be a space between words =  3 spaces in Morse
+
+        if (morse[i] == ' ' ){  
+            if (i+1 < morse.length() and morse[i+1] != ' '){
+                // it's the end of a character
+                res += dict_morse_car[temp];
+                temp = "";
+            }
+            else if (i>0 and morse[i-1] != ' '){
+                // it's the end of a character 
+                res += dict_morse_car[temp];
+                temp = "";
+            }
+            if (i>0 and morse[i-1] == ' '){
+                // we're in the middle of a space -> do nothing
+            }
+            if (i>1 and morse[i-1] == ' ' and morse[i-2] == ' '){
+                // we're at the end of a space
+                res += " ";
+            }
         }
         else if (i+1 == morse.length()){
+            // it's the end of the text and of a character
             temp += morse[i];
             res += dict_morse_car[temp];
         }
         else
         {
+            // we're in the middle of a character
             temp += morse[i];
         }
-        
     }
 
     return res;
