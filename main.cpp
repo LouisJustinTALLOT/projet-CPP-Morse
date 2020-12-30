@@ -140,6 +140,8 @@ std::string text_to_Morse(std::string text,
                         std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse()){
     std::string res = "";
     dict_car_morse[" "] = "  ";
+    text = trim(text);
+
     for (int i = 0; i<text.length(); i++){
         std::string car (1,text[i]);
         std::map <std::string, std::string>::const_iterator pos = dict_car_morse.find(car);
