@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <locale>
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
@@ -161,6 +162,12 @@ std::string text_to_Morse(std::string text,
     dict_car_morse[" "] = "  ";
     text = trim(text);
 
+    std::locale loc;
+
+    for (std::string::size_type i=0; i<text.length(); i++){
+        text[i] = std::tolower(text[i], loc);
+    }
+    
     for (int i = 0; i<text.length(); i++){
         std::string car (1,text[i]);
         std::map <std::string, std::string>::const_iterator pos = dict_car_morse.find(car);
@@ -174,7 +181,7 @@ std::string text_to_Morse(std::string text,
 
 int main(int argc, char *argv[]){
     std::string entry_text = "";
-    
+
     if(argc > 1){
         
         for (int i = 1; i<argc; i++){
