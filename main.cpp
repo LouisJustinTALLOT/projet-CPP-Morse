@@ -153,8 +153,18 @@ std::string text_to_Morse(std::string text,
     return res;
 }
 
-int main(){
+int main(int argc, char *argv[]){
 
+    if(argc > 1){
+        std::string entry_text = "";
+        for (int i = 1; i<argc; i++){
+            entry_text += std::string(argv[i]);
+            if (i + 1 <argc){
+                entry_text += " ";
+            }
+        }
+        std::cout<<std::endl<<entry_text<<std::endl;
+    }
 
     std::map <std::string, std::string> dict_morse_car = create_dict_morse_to_car();
     std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
