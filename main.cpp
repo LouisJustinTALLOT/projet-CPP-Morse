@@ -190,6 +190,19 @@ int main(int argc, char *argv[]){
     std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
    
 
+    int entry_type = detect_entry_type(entry_text);
+
+    if (entry_type == 1){
+        // we have text -> Morse
+        std::cout<<text_to_Morse(entry_text, dict_car_morse)<<std::endl;
+    }
+    else if (entry_type == 2){
+        // we have Morse code
+        std::cout<<Morse_to_text(entry_text, dict_morse_car)<<std::endl;
+    }
+    
+    // various tests :
+
     std::string test_morse_1 = "    .... . .-.. .-.. ---   .-- --- .-. .-.. -..   -.-.--   ";
     std::cout<<Morse_to_text(test_morse_1, dict_morse_car)<<std::endl;
     std::string test_text_1 = "     hello world !      ";
