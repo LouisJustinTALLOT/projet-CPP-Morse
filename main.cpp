@@ -63,6 +63,7 @@ std::map <std::string, std::string> create_dict_car_to_morse(){
         // std::cout<<item.first<<" -> "<<item.second<<std::endl;
         m[item.second] = item.first;
     }
+    m[" "] = "   ";
 
     return m;
 }
@@ -88,6 +89,21 @@ std::string Morse_to_text(std::string morse,
             temp += morse[i];
         }
         
+    }
+
+    return res;
+}
+
+std::string text_to_Morse(std::string text, 
+                        std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse()){
+    std::string res = "";
+    dict_car_morse[" "] = "  ";
+    for (int i = 0; i<text.length(); i++){
+        std::string car (1,text[i]);
+        std::map <std::string, std::string>::const_iterator pos = dict_car_morse.find(car);
+    
+        res += pos->second;
+        res += " ";
     }
 
     return res;
