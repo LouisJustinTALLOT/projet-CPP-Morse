@@ -22,6 +22,25 @@ std::string trim(const std::string& s)
     return rtrim(ltrim(s));
 }
 
+int detect_entry_type(std::string entry){
+    // returns :
+    // 1 if text
+    // 2 if Morse code
+    // 3 if file to open
+    entry = trim(entry);
+
+    if (entry.find(".txt") != std::string::npos){
+        // then we have a (path to a) .txt file
+        return 3;
+    }
+    if (entry[0]=='.' or entry[0] == '-'){
+        // it's Morse
+        return 2;
+    }
+    // it's text
+    return 1; 
+}
+
 std::map <std::string, std::string> create_dict_morse_to_car(){
     std::map <std::string, std::string> m;
 
@@ -154,9 +173,10 @@ std::string text_to_Morse(std::string text,
 }
 
 int main(int argc, char *argv[]){
-
+    std::string entry_text = "";
+    
     if(argc > 1){
-        std::string entry_text = "";
+        
         for (int i = 1; i<argc; i++){
             entry_text += std::string(argv[i]);
             if (i + 1 <argc){
@@ -174,6 +194,10 @@ int main(int argc, char *argv[]){
     std::cout<<Morse_to_text(test_morse_1, dict_morse_car)<<std::endl;
     std::string test_text_1 = "     hello world !      ";
     std::cout<<text_to_Morse(test_text_1, dict_car_morse)<<std::endl;
+
+    if (argc >1){
+        std::cout<<std::endl<<detect_entry_type(entry_text)<<std::endl;
+    }
 
     return 0;
 }
