@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <cmath>
+#include <fstream>
 #include <algorithm>
 #include <locale>
+
+#include "to_audio.hpp"
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
