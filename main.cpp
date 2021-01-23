@@ -193,6 +193,75 @@ std::string text_to_Morse(std::string text, std::map <std::string, std::string> 
     return res;
 }
 
+void Morse_to_wav(std::string morse, std::string filename="output.wav"){
+    std::cout<<"Generating output file "<<filename<<std::endl;
+
+    std::ofstream f( filename.c_str(), std::ios::binary ); 
+    size_t data_chunk_pos = create_file(f);
+
+    // we first trim the leading and trailing spaces of morse text
+    morse = trim(morse);
+
+    for(int i=0; i<morse.length(); i++ ){
+        // for each character we check whether it is a space or not 
+        // if yes it is the end of a letter
+        // but it could also be a space between words =  3 spaces in Morse
+
+        if (morse[i] == ' ' ){  
+            std::cout<<" ";
+            if (i+1 < morse.length() and morse[i+1] != ' '){
+                // it's the end of a character
+                short_space_wav(f);
+            }
+            else if (i>0 and morse[i-1] != ' '){
+                // it's the end of a character 
+                short_space_wav(f);
+            }
+            if (i>0 and morse[i-1] == ' '){
+                // we're in the middle of a space -> do nothing
+            }
+            if (i>1 and morse[i-1] == ' ' and morse[i-2] == ' '){
+                // we're at the end of a space
+                space_wav(f);
+            }
+        }
+        else if (i+1 == morse.length()){
+            std::cout<<morse[i];
+            
+            // it's the end of the text
+            // we have a dot or a dash
+            if (morse[i]=='.'){
+                dot_wav(f); 
+                short_space_wav(f);
+            }
+            else if (morse[i]=='-'){
+                dash_wav(f);
+                short_space_wav(f);
+            }
+            else{
+                std::cerr<<"ni l'un ni l'autre"<<std::endl;
+            }
+        }
+        else{   // we have a dot or a dash
+            std::cout<<morse[i];
+
+            if (morse[i]=='.'){
+                dot_wav(f); 
+                short_space_wav(f);
+            }
+            else if (morse[i]=='-'){
+                dash_wav(f);
+                short_space_wav(f);
+            }
+            else{
+                std::cerr<<"ni l'un ni l'autre"<<std::endl;
+            }
+        }
+    }
+    finish_file(f, data_chunk_pos);
+    std::cout<<std::endl;
+}
+
 int main(int argc, char *argv[]){
     std::string entry_text = "";
 
