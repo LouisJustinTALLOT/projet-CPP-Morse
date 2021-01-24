@@ -34,14 +34,9 @@ int detect_entry_type(std::string entry){
     // returns :
     // 1 if text
     // 2 if Morse code
-    // 3 if file to open = .txt
-    // 4 if file to open = .wav
+    // 3 if file to open
     entry = trim(entry);
 
-    if (entry.find(".wav") != std::string::npos){
-        // then we have a (path to a) .txt file
-        return 4;
-    }
     if (entry.find(".txt") != std::string::npos){
         // then we have a (path to a) .txt file
         return 3;
@@ -131,7 +126,8 @@ std::map <std::string, std::string> create_dict_car_to_morse(){
         // std::cout<<item.first<<" -> "<<item.second<<std::endl;
         m[item.second] = item.first;
     }
-    m[" "] = "   ";
+    m[" "]  = "   ";
+    m["\n"] = "   ";
 
     return m;
 }
