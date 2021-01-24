@@ -368,6 +368,9 @@ int main(int argc, char *argv[]){
         std::ofstream out(filename);
         out << text_result;
         out.close();
+
+        std::cout<<"The Morse code was decoded in the txt file '"<<filename<<"'"<<std::endl;
+
     }
     else if (entry_type == 3){
         // then we have to translate from a txt file
@@ -450,7 +453,7 @@ int main(int argc, char *argv[]){
         out.close();
 
                  
-
+        std::cout<<"The Morse code was decoded in the txt file '"<<filename2<<"'"<<std::endl;
 
     }
     else{ 
