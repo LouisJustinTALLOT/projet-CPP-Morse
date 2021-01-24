@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdlib>
 #include <filesystem>
+#include <streambuf>
 
 #include "to_audio.hpp"
 #include "from_audio.hpp"
@@ -33,6 +34,26 @@ std::string trim(const std::string& s)
 
 std::size_t number_of_files_in_directory(std::filesystem::path path){
     return (std::size_t)std::distance(std::filesystem::directory_iterator{path}, std::filesystem::directory_iterator{});
+}
+
+std::vector<std::string> split(std::string s){
+    std::vector<std::string> res;
+    std::string temp="";
+    std::string x;
+
+    for (std::string::size_type i = 0; i < s.size(); i++) {
+        x = s[i];
+        if (x == " "){
+            res.push_back(temp);
+            temp = "";
+        }
+        else{
+            temp += x;
+        }
+    }
+    res.push_back(temp);
+
+    return res;
 }
 
 int detect_entry_type(std::string entry){
