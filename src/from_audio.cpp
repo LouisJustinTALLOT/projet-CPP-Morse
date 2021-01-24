@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstdlib>
 
 // #include "from_audio.hpp"
 
@@ -44,43 +45,43 @@ std::string data_to_Morse(std::vector<int> data){
     bool change = false;
 
     std::vector<int> parts_length;
+    std::vector<bool> space_or_not;
     
     for (int i=0; i<len-40; i++){
 
-        if(i<100){
-            std::cout<<"i "<<i<<" "<<min_length<<std::endl;
-        }
-
         if (data[i]==0 && data[i+1]==0 && data[i+2]==0 && data[i+3]==0 &&data[i+4]==0 && data[i+5]==0 && data[i+6]==0 && data[i+7]==0){
+
+            // then we are in a space
             if (in_a_space){
                 change = false;
             }
             else {
                 change = true;
             }
-
             // we are in a space
             in_a_space = true;
             if (i>10){
                 end = i;
                 
                 if (change){
-                    parts_length.push_back(end-beg);
+                    parts_length.push_back(end-beg); // we add the new part
+                    space_or_not.push_back(false); // we begin a "not space"
+
                     if (end-beg < min_length){
                         min_length = end-beg;
                     }
                     beg = i;
                 }
             }
-            
         }
         else {
+            // then we are in a dot or a dash
+
             if (not in_a_space){
                 change = false;
             }
             else{
                 change = true;
-                // std::cout<<"lalal "<<i<<" "<<beg<<std::endl;
             }
             in_a_space = false;
 
@@ -88,22 +89,43 @@ std::string data_to_Morse(std::vector<int> data){
                 end = i;
                 
                 if (change){
-                    parts_length.push_back(end-beg);
+                    parts_length.push_back(end-beg); // we add the new part
+                    space_or_not.push_back(true); // we begin a space
+
                     if (end-beg < min_length){
                         min_length = end-beg;
                     }
                     beg = i;
                 }
             }
-            
-            
         }
-
     }
-    std::cout<<parts_length.size()<<std::endl<<std::endl;
-    std::cout<<min_length<<std::endl<<std::endl;
-    for (int x : parts_length){
-        std::cout<<x<<"\n";
+
+    for (int i =0; i<int(parts_length.size()); i++){
+        // std::cout<<parts_length[i]<<" "<<space_or_not[i]<<std::endl;
+        if (space_or_not[i]){// then it was a space
+
+            if (abs(parts_length[i]-min_length)<100){
+                // then it is the smallest space, the one between characters -> nothing
+                Morse += "";
+            }
+            else if (abs(parts_length[i]- 2*min_length)<100){
+                Morse += " ";
+            }
+            else{
+                Morse += "   ";
+            }
+        }
+        else {
+            if (abs(parts_length[i]-min_length)<100){
+                // then it is a dot 
+                Morse += ".";
+            }
+            else{
+                Morse += "-";
+            }
+
+        }
     }
 
     return Morse;
