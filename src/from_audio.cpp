@@ -27,3 +27,8 @@ std::vector<int> file_data(std::ifstream& f){
 
     return res;
 }
+
+int main(){
+    std::ifstream f("test_1.wav", std::ios::binary);
+    // std::cout<<"here"<<std::endl;
+    std::vector<int> a = file_data(f);
