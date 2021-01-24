@@ -350,6 +350,14 @@ int main(int argc, char *argv[]){
         out << text_result;
         out.close();
     }
+    else if (entry_type == 3){
+        // then we have to translate from a txt file
+
+        
+
+    }
+    else if (entry_type == 4){
+
     }
     else{ 
     
