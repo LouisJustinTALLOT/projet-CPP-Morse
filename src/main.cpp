@@ -30,17 +30,18 @@ std::string trim(const std::string& s)
     return rtrim(ltrim(s));
 }
 
-std::size_t number_of_files_in_directory(std::filesystem::path path){
-    return (std::size_t)std::distance(std::filesystem::directory_iterator{path}, std::filesystem::directory_iterator{});
-}
-
 int detect_entry_type(std::string entry){
     // returns :
     // 1 if text
     // 2 if Morse code
-    // 3 if file to open
+    // 3 if file to open = .txt
+    // 4 if file to open = .wav
     entry = trim(entry);
 
+    if (entry.find(".wav") != std::string::npos){
+        // then we have a (path to a) .txt file
+        return 4;
+    }
     if (entry.find(".txt") != std::string::npos){
         // then we have a (path to a) .txt file
         return 3;
