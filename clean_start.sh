@@ -8,4 +8,6 @@ rm ./in/txt/**
 
 echo in directory cleaned
 
+rm output.wav
+
 echo ready for use !
