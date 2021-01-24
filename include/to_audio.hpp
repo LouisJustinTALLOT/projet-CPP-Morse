@@ -1,6 +1,6 @@
 #pragma once
 
-#include<string>
+#include <string>
 #include <cmath>
 #include <fstream>
 #include <iostream>
