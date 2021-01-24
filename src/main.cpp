@@ -308,7 +308,25 @@ int main(int argc, char *argv[]){
 
     if (entry_type == 1){
         // we have text -> Morse
-        std::cout<<text_to_Morse(entry_text, dict_car_morse)<<std::endl;
+        std::cout<<"You entered the following text :"<<std::endl;
+        std::cout<<std::endl<<entry_text<<std::endl<<std::endl<<std::endl;
+        std::cout<<"Here it is translated back into Morse code:"<<std::endl;
+
+        std::string Morse_result = text_to_Morse(entry_text, dict_car_morse);
+        std::cout<<Morse_result<<std::endl<<std::endl;
+        
+        // we then generate the wav file, with a new name each time
+
+        std::filesystem::path p ="./out/wav";
+        std::size_t s = number_of_files_in_directory(p);
+
+        std::string filename = "./out/wav/output_";
+        filename += std::to_string(s);
+        filename += ".wav";
+
+        Morse_to_wav(Morse_result, filename);
+
+        std::cout<<"The Morse code was translated in the audio file '"<<filename<<"'"<<std::endl;
     }
     else if (entry_type == 2){
         // we have Morse code
