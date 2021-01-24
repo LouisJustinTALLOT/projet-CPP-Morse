@@ -382,19 +382,28 @@ int main(int argc, char *argv[]){
     }
     else{ 
     
-    // various tests :
+        // various tests :
 
-    std::string test_morse_1 = "    .... . .-.. .-.. ---   .-- --- .-. .-.. -..   -.-.--   ";
-    std::cout<<Morse_to_text(test_morse_1, dict_morse_car)<<std::endl;
-    std::string test_text_1 = "     hello world !      ";
-    std::cout<<text_to_Morse(test_text_1, dict_car_morse)<<std::endl;
+        std::string test_morse_1 = "    .... . .-.. .-.. ---   .-- --- .-. .-.. -..   -.-.--   ";
+        std::cout<<Morse_to_text(test_morse_1, dict_morse_car)<<std::endl;
+        std::string test_text_1 = "     hello world !      ";
+        std::cout<<text_to_Morse(test_text_1, dict_car_morse)<<std::endl;
 
-    if (argc >1){
-        std::cout<<std::endl<<detect_entry_type(entry_text)<<std::endl;
-    }
+        if (argc >1){
+            std::cout<<std::endl<<detect_entry_type(entry_text)<<std::endl;
+        }
 
-    // first test with audio 
-    Morse_to_wav(test_morse_1);
+        // first test with audio 
+        Morse_to_wav(test_morse_1);
+        std::cout<< std::endl;
+
+        std::vector sp = split("aaa aaa aaa");
+        for (auto x:sp){
+            std::cout<<x<<" ";
+        }
+        std::cout<< std::endl;
+
+
     }
     return 0;
 }
