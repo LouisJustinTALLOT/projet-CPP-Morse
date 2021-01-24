@@ -7,6 +7,7 @@
 #include <locale>
 #include <vector>
 #include <cstdlib>
+#include <filesystem>
 
 #include "to_audio.hpp"
 #include "from_audio.hpp"
@@ -28,6 +29,10 @@ std::string rtrim(const std::string& s)
 std::string trim(const std::string& s)
 {
     return rtrim(ltrim(s));
+}
+
+std::size_t number_of_files_in_directory(std::filesystem::path path){
+    return (std::size_t)std::distance(std::filesystem::directory_iterator{path}, std::filesystem::directory_iterator{});
 }
 
 int detect_entry_type(std::string entry){
