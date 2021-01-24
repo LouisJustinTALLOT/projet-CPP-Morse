@@ -290,14 +290,21 @@ int main(int argc, char *argv[]){
                 entry_text += " ";
             }
         }
-        std::cout<<std::endl<<entry_text<<std::endl;
+        std::cout<<std::endl<<argc<<std::endl<<std::endl<<std::endl;
+
     }
 
     std::map <std::string, std::string> dict_morse_car = create_dict_morse_to_car();
     std::map <std::string, std::string> dict_car_morse = create_dict_car_to_morse();
    
+    int entry_type; // will allow us to know what to do
 
-    int entry_type = detect_entry_type(entry_text);
+    if(argc>1){
+        entry_type = detect_entry_type(entry_text);
+    }
+    else{
+        entry_type = 0;
+    }
 
     if (entry_type == 1){
         // we have text -> Morse
@@ -307,6 +314,7 @@ int main(int argc, char *argv[]){
         // we have Morse code
         std::cout<<Morse_to_text(entry_text, dict_morse_car)<<std::endl;
     }
+    else{ 
     
     // various tests :
 
@@ -321,6 +329,6 @@ int main(int argc, char *argv[]){
 
     // first test with audio 
     Morse_to_wav(test_morse_1);
-
+    }
     return 0;
 }
