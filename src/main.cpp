@@ -371,8 +371,42 @@ int main(int argc, char *argv[]){
     }
     else if (entry_type == 3){
         // then we have to translate from a txt file
+        std::vector<std::string> split_entry = split(entry_text);
+        std::string filename;
 
+        for(std::string x: split_entry){
+            if (x.find(".txt") != std::string::npos){
+                filename = x;
+                break;
+            }
+        }
+
+        filename = "./in/txt/" + filename;
+
+        std::ifstream t(filename);
+        std::string entry_from_file((std::istreambuf_iterator<char>(t)),
+                 std::istreambuf_iterator<char>());
+
+
+        std::cout<<"You entered the following text :"<<std::endl;
+        std::cout<<std::endl<<entry_from_file<<std::endl<<std::endl<<std::endl;
+        std::cout<<"Here it is translated back into Morse code:"<<std::endl;
+
+        std::string Morse_result = text_to_Morse(entry_from_file, dict_car_morse);
+        std::cout<<Morse_result<<std::endl<<std::endl;
         
+        // we then generate the wav file, with a new name each time
+
+        std::filesystem::path p ="./out/wav";
+        std::size_t s = number_of_files_in_directory(p);
+
+        std::string filename2 = "./out/wav/output_";
+        filename2 += std::to_string(s);
+        filename2 += ".wav";
+
+        Morse_to_wav(Morse_result, filename2);
+
+        std::cout<<"The Morse code was translated in the audio file '"<<filename2<<"'"<<std::endl;
 
     }
     else if (entry_type == 4){
