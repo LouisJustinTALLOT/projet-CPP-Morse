@@ -39,9 +39,14 @@ int detect_entry_type(std::string entry){
     // returns :
     // 1 if text
     // 2 if Morse code
-    // 3 if file to open
+    // 3 if file to open = .txt
+    // 4 if file to open = .wav
     entry = trim(entry);
 
+    if (entry.find(".wav") != std::string::npos){
+        // then we have a (path to a) .txt file
+        return 4;
+    }
     if (entry.find(".txt") != std::string::npos){
         // then we have a (path to a) .txt file
         return 3;
