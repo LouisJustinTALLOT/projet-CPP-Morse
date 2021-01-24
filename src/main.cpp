@@ -5,8 +5,11 @@
 #include <fstream>
 #include <algorithm>
 #include <locale>
+#include <vector>
+#include <cstdlib>
 
 #include "to_audio.hpp"
+#include "from_audio.hpp"
 
 const std::string WHITESPACE = " \n\r\t\f\v";
 
