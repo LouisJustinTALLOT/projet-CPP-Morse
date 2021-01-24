@@ -311,8 +311,6 @@ int main(int argc, char *argv[]){
                 entry_text += " ";
             }
         }
-        std::cout<<std::endl<<argc<<std::endl<<std::endl<<std::endl;
-
     }
 
     std::map <std::string, std::string> dict_morse_car = create_dict_morse_to_car();
@@ -358,7 +356,7 @@ int main(int argc, char *argv[]){
         std::string text_result = Morse_to_text(entry_text, dict_morse_car);
         std::cout<<text_result<<std::endl<<std::endl;
 
-        // we then generate the wav file, with a new name each time
+        // we then generate the txt file, with a new name each time
 
         std::filesystem::path p ="./out/txt";
         std::size_t s = number_of_files_in_directory(p);
