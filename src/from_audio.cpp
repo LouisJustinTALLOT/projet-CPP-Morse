@@ -4,12 +4,14 @@
 #include <vector>
 #include <cstdlib>
 
-// #include "from_audio.hpp"
+#include "from_audio.hpp"
 
 // g++ from_audio.cpp -g -o from_audio
 
 
 std::vector<int> file_data(std::ifstream& f){
+    // get the data from the wave file
+
     std::streampos len;
     f.seekg (0, std::ios::end);
     len = f.tellg(); // this is the length of the file
@@ -30,6 +32,9 @@ std::vector<int> file_data(std::ifstream& f){
 }
 
 std::string data_to_Morse(std::vector<int> data){
+    // transform the data from wave file to Morse
+    // by analyzing and detecting the various patterns
+
     std::string Morse = ""; 
 
     int len = int(data.size());// length of WAV file
@@ -100,6 +105,7 @@ std::string data_to_Morse(std::vector<int> data){
             }
         }
     }
+    // we will now create Morse code from the gathered info
 
     for (int i =0; i<int(parts_length.size()); i++){
         // std::cout<<parts_length[i]<<" "<<space_or_not[i]<<std::endl;
@@ -131,7 +137,7 @@ std::string data_to_Morse(std::vector<int> data){
     return Morse;
 }
 
-
+/*
 
 int main(){
     std::ifstream f("test_1.wav", std::ios::binary);
@@ -142,3 +148,5 @@ int main(){
 
     return 0;
 }
+
+*/
